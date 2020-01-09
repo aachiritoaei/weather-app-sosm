@@ -64,7 +64,7 @@ public class WeatherFragment extends Fragment {
         fragmentView.findViewById(R.id.errorText).setVisibility(View.GONE);
 
         // Make the request.
-        String url = API_URL + "?q=" + CITY + "&units=metric&APPID=" + API_KEY;
+        String url = API_URL + "?id=" + CITY + "&units=metric&APPID=" + API_KEY;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
