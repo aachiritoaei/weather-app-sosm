@@ -23,14 +23,14 @@ import java.util.Locale;
 
 public class WeatherFragment extends Fragment {
 
+    private RequestQueue requestQueue;
+
     private String CITY = "bucharest,ro";
     private String API_KEY = "29e467343e075e50e073a55cd8a83d8c";
     private String API_URL = "https://api.openweathermap.org/data/2.5/weather";
 
     private TextView addressTxt, updated_atTxt, statusTxt, tempTxt, temp_minTxt, temp_maxTxt,
             windTxt, pressureTxt, humidityTxt;
-
-    private RequestQueue requestQueue;
 
     public WeatherFragment(String city, RequestQueue requestQueue) {
         this.CITY = city;

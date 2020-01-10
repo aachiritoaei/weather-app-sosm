@@ -61,10 +61,7 @@ public class MainActivity extends FragmentActivity {
 
         // Swipe ViewPager.
         viewPager = findViewById(R.id.pager);
-        citiesList = new ArrayList<>();
-        citiesList.add("bucharest,ro"); // Bucharest
-        citiesList.add("zurich,ch"); // Zurich
-        citiesList.add("london,uk"); // London
+        initializeCities();
         pagerAdapter = new WeatherCollectionAdapter(getSupportFragmentManager(), citiesList, requestQueue);
         viewPager.setAdapter(pagerAdapter);
 
@@ -104,5 +101,12 @@ public class MainActivity extends FragmentActivity {
                 pagerAdapter.removeItem(viewPager.getCurrentItem());
             }
         });
+    }
+
+    private void initializeCities() {
+        citiesList = new ArrayList<>();
+        citiesList.add("bucharest,ro"); // Bucharest
+        citiesList.add("zurich,ch"); // Zurich
+        citiesList.add("london,uk"); // London
     }
 }

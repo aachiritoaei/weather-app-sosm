@@ -12,8 +12,8 @@ import java.util.List;
 
 public class WeatherCollectionAdapter extends FragmentStatePagerAdapter {
 
-    List<String> citiesList;
-    RequestQueue requestQueue;
+    private List<String> citiesList;
+    private RequestQueue requestQueue;
 
     public WeatherCollectionAdapter(FragmentManager fa, List<String> citiesList, RequestQueue requestQueue) {
         super(fa);

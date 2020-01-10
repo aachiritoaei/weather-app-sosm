@@ -9,45 +9,55 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-<!--        <fragment-->
-<!--            android:id="@+id/autocompleteFragment"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="1"-->
-<!--            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"/>-->
-
-        <EditText
-            android:id="@+id/cityEditText"
+        <!--        <fragment-->
+        <!--            android:id="@+id/autocompleteFragment"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_weight="1"-->
+        <!--            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"/>-->
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0sp"
-            android:layout_weight="2"
-            android:textAlignment="center"
-            android:gravity="center"
-            android:inputType="text"
-            android:textColor="@color/colorAccent"
-            android:hint="Insert city.."/>
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
 
-        <Button
-            android:id="@+id/addCity"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:background="@drawable/bg_gradient"
-            android:text="ADD" />
+            <EditText
+                android:id="@+id/cityEditText"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:background="@drawable/bg_gradient"
+                android:gravity="center"
+                android:hint="Insert city.."
+                android:inputType="text"
+                android:textAlignment="center"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="@color/colorAccentDiminished" />
 
-        <Button
-            android:id="@+id/deleteCity"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:background="@drawable/bg_gradient"
-            android:text="DELETE" />
+            <Button
+                android:id="@+id/addCity"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_gradient"
+                android:text="ADD CITY"
+                android:textColor="@color/colorAccent" />
+
+            <Button
+                android:id="@+id/deleteCity"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_gradient"
+                android:text="DELETE CURRENT CITY"
+                android:textColor="@color/colorAccent" />
+        </LinearLayout>
+
 
         <androidx.viewpager.widget.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/pager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="20" />
+            android:layout_weight="40" />
     </LinearLayout>
 
 
