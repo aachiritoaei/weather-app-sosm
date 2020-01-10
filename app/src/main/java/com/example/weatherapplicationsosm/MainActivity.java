@@ -2,26 +2,18 @@ package com.example.weatherapplicationsosm;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.common.api.Status;
-import com.google.android.libraries.places.api.Places;
-import com.google.android.libraries.places.api.model.Place;
-import com.google.android.libraries.places.api.model.TypeFilter;
-import com.google.android.libraries.places.api.net.PlacesClient;
-import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
-import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends FragmentActivity {
@@ -44,46 +36,59 @@ public class MainActivity extends FragmentActivity {
         // HTTP Volley request queue.
         requestQueue = Volley.newRequestQueue(this);
 
-        // Places API KEY.
-        Places.initialize(this, PLACES_API_KEY);
-        PlacesClient placesClient = Places.createClient(this);
-
-        // Initialize the AutocompleteSupportFragment.
-        AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
-                getSupportFragmentManager().findFragmentById(R.id.autocompleteFragment);
-        // Specify the types of place data to return.
-        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
-        autocompleteFragment.setTypeFilter(TypeFilter.CITIES);
-        // Set up a PlaceSelectionListener to handle the response.
-        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
-            @Override
-            public void onPlaceSelected(Place place) {
-                pagerAdapter.addItem(place.getId());
-            }
-
-            @Override
-            public void onError(Status status) {
-                // TODO: Handle the error.
-                Log.i("TEST", "An error occurred: " + status);
-            }
-        });
+//        // Places API KEY.
+//        Places.initialize(this, PLACES_API_KEY);
+//        PlacesClient placesClient = Places.createClient(this);
+//
+//        // Initialize the AutocompleteSupportFragment.
+//        AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
+//                getSupportFragmentManager().findFragmentById(R.id.autocompleteFragment);
+//        // Specify the types of place data to return.
+//        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
+//        autocompleteFragment.setTypeFilter(TypeFilter.CITIES);
+//        // Set up a PlaceSelectionListener to handle the response.
+//        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+//            @Override
+//            public void onPlaceSelected(Place place) {
+//                pagerAdapter.addItem(place.getId());
+//            }
+//
+//            @Override
+//            public void onError(Status status) {
+//                Log.i("TEST", "An error occurred: " + status);
+//            }
+//        });
 
         // Swipe ViewPager.
         viewPager = findViewById(R.id.pager);
         citiesList = new ArrayList<>();
-        citiesList.add("683506"); // Bucharest
-        citiesList.add("2657896"); // Zurich
-        citiesList.add("2643743"); // London
+        citiesList.add("bucharest,ro"); // Bucharest
+        citiesList.add("zurich,ch"); // Zurich
+        citiesList.add("london,uk"); // London
         pagerAdapter = new WeatherCollectionAdapter(getSupportFragmentManager(), citiesList, requestQueue);
         viewPager.setAdapter(pagerAdapter);
 
-        // Add a add button.
+        // City edit text.
         cityId = findViewById(R.id.cityEditText);
+        cityId.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+                    Log.i("ADD", cityId.getText().toString());
+                    pagerAdapter.addItem(cityId.getText().toString());
+                    cityId.setText("");
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        // Add a add button.
         addButton = findViewById(R.id.addCity);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println(viewPager.getCurrentItem());
+                Log.i("ADD", cityId.getText().toString());
                 pagerAdapter.addItem(cityId.getText().toString());
                 cityId.setText("");
             }
@@ -94,7 +99,8 @@ public class MainActivity extends FragmentActivity {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println(viewPager.getCurrentItem());
+//                System.out.println(viewPager.getCurrentItem());
+                Log.i("REMOVE", viewPager.getCurrentItem() + "");
                 pagerAdapter.removeItem(viewPager.getCurrentItem());
             }
         });
