@@ -1,5 +1,7 @@
 package com.example.weatherapplicationsosm;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -14,7 +16,10 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class MainActivity extends FragmentActivity {
 
@@ -104,9 +109,17 @@ public class MainActivity extends FragmentActivity {
     }
 
     private void initializeCities() {
-        citiesList = new ArrayList<>();
-        citiesList.add("bucharest,ro"); // Bucharest
-        citiesList.add("zurich,ch"); // Zurich
-        citiesList.add("london,uk"); // London
+        SharedPreferences sharedPreferences = getSharedPreferences("cities", Context.MODE_PRIVATE);
+        Set<String> citiesSet = sharedPreferences.getStringSet("cities", new HashSet<>(Arrays.asList("bucharest", "zurich", "london")));
+        citiesList = new ArrayList<>(citiesSet);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        SharedPreferences sharedPreferences = getSharedPreferences("cities", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putStringSet("cities", new HashSet<>(citiesList));
+        editor.commit();
     }
 }
