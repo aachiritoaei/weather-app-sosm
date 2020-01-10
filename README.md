@@ -21,3 +21,6 @@ application is opened.
 There are no checks for input correctness for the API calls or duplicates.
 
 For a small demo, android_demo.webm is available.
+
+I tried to use the Places API from Google in order to have an autocomplete search for cities, but API Quota Limits
+made this not reliable, as I was reaching the limit pretty fast. (can be seen in the commented code)
