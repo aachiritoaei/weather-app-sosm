@@ -101,7 +101,6 @@ public class MainActivity extends FragmentActivity {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                System.out.println(viewPager.getCurrentItem());
                 Log.i("REMOVE", viewPager.getCurrentItem() + "");
                 pagerAdapter.removeItem(viewPager.getCurrentItem());
             }

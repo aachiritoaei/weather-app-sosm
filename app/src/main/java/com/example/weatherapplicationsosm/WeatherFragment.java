@@ -25,7 +25,7 @@ public class WeatherFragment extends Fragment {
 
     private RequestQueue requestQueue;
 
-    private String CITY = "bucharest,ro";
+    private String city = "bucharest,ro";
     private String API_KEY = "29e467343e075e50e073a55cd8a83d8c";
     private String API_URL = "https://api.openweathermap.org/data/2.5/weather";
 
@@ -33,7 +33,7 @@ public class WeatherFragment extends Fragment {
             windTxt, pressureTxt, humidityTxt;
 
     public WeatherFragment(String city, RequestQueue requestQueue) {
-        this.CITY = city;
+        this.city = city;
         this.requestQueue = requestQueue;
     }
 
@@ -64,7 +64,7 @@ public class WeatherFragment extends Fragment {
         fragmentView.findViewById(R.id.errorText).setVisibility(View.GONE);
 
         // Make the request.
-        String url = API_URL + "?q=" + CITY + "&units=metric&APPID=" + API_KEY;
+        String url = API_URL + "?q=" + city + "&units=metric&APPID=" + API_KEY;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
